@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: sehatsetu-api
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt && cd backend && python manage.py migrate"
+    startCommand: "cd backend && python manage.py collectstatic --noinput && gunicorn sehatsetu.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "*.render.com"

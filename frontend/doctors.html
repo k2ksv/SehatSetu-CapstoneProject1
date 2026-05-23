@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors | Sehat Setu</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .doctors-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: pageFadeIn 0.45s ease both;
+        }
+
+        .filters {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .filters:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+        }
+
+        .filters input, .filters select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-width: 150px;
+        }
+
+        .filters button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .filters button:hover {
+            background: #0056b3;
+        }
+
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .doctor-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            animation: fadeInUp 0.5s ease both;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 22px rgba(0,0,0,0.12);
+        }
+
+        .doctor-image {
+            transition: transform 0.3s ease;
+        }
+
+        .doctor-card:hover .doctor-image {
+            transform: scale(1.03);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pageFadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .doctor-photo {
+            width: 100%;
+            height: 200px;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .doctor-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .doctor-info {
+            padding: 15px;
+        }
+
+        .doctor-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .doctor-specialty {
+            color: #007bff;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .doctor-details {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .doctor-rating {
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .view-profile-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .view-profile-btn:hover {
+            background: #218838;
+            color: white;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .no-doctors {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filters input, .filters select {
+                min-width: auto;
+            }
+
+            .doctors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" class="site-brand">
+            <img src="assets/sehatsetu-logo.png" alt="Sehat Setu Logo" class="site-logo">
+            <div class="brand-text">
+                <strong>Sehat Setu</strong>
+                <span class="brand-subtitle">Dashboard & Health Connect</span>
+            </div>
+        </a>
+        <nav class="site-nav">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="doctors.html">Doctors</a>
+            <a href="hospitals.html">Hospitals</a>
+            <a href="labtests.html">Lab Tests</a>
+            <a href="compare.html">Compare</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+    <div class="doctors-container">
+        <h1>Find Doctors</h1>
+
+        <div class="filters">
+            <input type="text" id="searchName" placeholder="Search by name...">
+            <input type="text" id="searchSpecialty" placeholder="Search by specialty...">
+            <input type="text" id="searchLocation" placeholder="Search by location...">
+            <select id="sortBy">
+                <option value="">Sort By</option>
+                <option value="rating">Rating</option>
+                <option value="experience">Experience</option>
+                <option value="fee">Consultation Fee</option>
+            </select>
+            <button onclick="filterDoctors()">Search</button>
+            <button onclick="clearFilters()">Clear</button>
+        </div>
+
+        <div id="doctorsGrid" class="doctors-grid">
+            <div class="loading">Loading doctors...</div>
+        </div>
+    </div>
+
+    <script>
+        const backendUrl = 'http://127.0.0.1:8000';
+        let allDoctors = [];
+
+        async function loadDoctors() {
+            try {
+                const response = await fetch(`${backendUrl}/api/doctors/`);
+                const data = await response.json();
+                allDoctors = data.doctors;
+                renderDoctors(allDoctors);
+            } catch (error) {
+                console.error('Error loading doctors:', error);
+                document.getElementById('doctorsGrid').innerHTML = '<div class="no-doctors">Error loading doctors. Please try again later.</div>';
+            }
+        }
+
+        function renderDoctors(doctors) {
+            const grid = document.getElementById('doctorsGrid');
+
+            if (doctors.length === 0) {
+                grid.innerHTML = '<div class="no-doctors">No doctors found matching your criteria.</div>';
+                return;
+            }
+
+            const doctorsHtml = doctors.map(doctor => `
+                <div class="doctor-card">
+                    <div class="doctor-photo">
+                        ${doctor.photo ?
+                            `<img src="${doctor.photo}" alt="Dr. ${doctor.name}" class="doctor-image">` :
+                            '<div>No Photo</div>'
+                        }
+                    </div>
+                    <div class="doctor-info">
+                        <div class="doctor-name">Dr. ${doctor.name}</div>
+                        <div class="doctor-specialty">${doctor.specialty}</div>
+                        <div class="doctor-details">
+                            <div>📍 ${doctor.location}</div>
+                            <div>🩺 ${doctor.experience_years} years experience</div>
+                            <div>🏥 ${doctor.hospital.name}</div>
+                            ${doctor.consultation_fee > 0 ? `<div>💰 ₹${doctor.consultation_fee}</div>` : ''}
+                        </div>
+                        <div class="doctor-rating">⭐ ${doctor.rating}/5.0</div>
+                        <a href="doctor_profile.html?id=${doctor.id}" class="view-profile-btn">View Profile</a>
+                    </div>
+                </div>
+            `).join('');
+
+            grid.innerHTML = doctorsHtml;
+        }
+
+        function filterDoctors() {
+            let filtered = [...allDoctors];
+
+            const searchName = document.getElementById('searchName').value.toLowerCase();
+            const searchSpecialty = document.getElementById('searchSpecialty').value.toLowerCase();
+            const searchLocation = document.getElementById('searchLocation').value.toLowerCase();
+            const sortBy = document.getElementById('sortBy').value;
+
+            if (searchName) {
+                filtered = filtered.filter(d => d.name.toLowerCase().includes(searchName));
+            }
+
+            if (searchSpecialty) {
+                filtered = filtered.filter(d => d.specialty.toLowerCase().includes(searchSpecialty));
+            }
+
+            if (searchLocation) {
+                filtered = filtered.filter(d => d.location.toLowerCase().includes(searchLocation));
+            }
+
+            if (sortBy) {
+                filtered.sort((a, b) => {
+                    switch (sortBy) {
+                        case 'rating':
+                            return b.rating - a.rating;
+                        case 'experience':
+                            return b.experience_years - a.experience_years;
+                        case 'fee':
+                            return a.consultation_fee - b.consultation_fee;
+                        default:
+                            return 0;
+                    }
+                });
+            }
+
+            renderDoctors(filtered);
+        }
+
+        function clearFilters() {
+            document.getElementById('searchName').value = '';
+            document.getElementById('searchSpecialty').value = '';
+            document.getElementById('searchLocation').value = '';
+            document.getElementById('sortBy').value = '';
+            renderDoctors(allDoctors);
+        }
+
+        // Load doctors when page loads
+        loadDoctors();
+    </script>
+</body>
+</html>

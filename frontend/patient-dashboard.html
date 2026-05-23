@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard | Sehat Setu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .role-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        .patient-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .action-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .action-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .action-card i {
+            font-size: 2em;
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        .logout-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .logout-btn:hover {
+            background: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" class="site-brand">
+            <img src="assets/sehatsetu-logo.png" alt="Sehat Setu Logo" class="site-logo">
+            <div class="brand-text">
+                <strong>Sehat Setu</strong>
+                <span class="brand-subtitle">Patient Dashboard</span>
+            </div>
+        </a>
+        <nav class="site-nav">
+            <a href="patient-dashboard.html">Dashboard</a>
+            <a href="doctors.html">Find Doctors</a>
+            <a href="hospitals.html">Hospitals</a>
+            <a href="labtests.html">Lab Tests</a>
+            <a href="compare.html">Compare</a>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </nav>
+    </header>
+
+    <div class="dashboard-page">
+        <aside class="dashboard-sidebar">
+            <div class="brand custom-brand-logo">
+                <span class="logo-circle">
+                    <img src="assets/sehatsetu-logo.png" alt="Sehat Setu Logo" style="width: 44px; height: 44px; border-radius: 50%; background: #fff; object-fit: cover; box-shadow: 0 2px 8px rgba(52,152,219,0.10);" />
+                </span>
+                <span class="logo-text">
+                    <strong>Sehat Setu</strong>
+                    <small>Patient Portal</small>
+                </span>
+            </div>
+            <nav class="dashboard-nav">
+                <a class="active" href="#overview">Overview</a>
+                <a href="#appointments">My Appointments</a>
+                <a href="#lab-reports">Lab Reports</a>
+                <a href="#profile">My Profile</a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div>
+                    <p class="eyebrow">Patient Dashboard</p>
+                    <h1 id="greeting">Good afternoon, Patient</h1>
+                    <span class="role-badge">Patient</span>
+                </div>
+                <a class="button button-small" href="index.html">Back to website</a>
+            </header>
+
+            <div class="patient-actions">
+                <div class="action-card" onclick="window.location.href='doctors.html'">
+                    <i>👨‍⚕️</i>
+                    <h3>Book Appointment</h3>
+                    <p>Schedule consultation with doctors</p>
+                </div>
+                <div class="action-card" onclick="window.location.href='labtests.html'">
+                    <i>🧪</i>
+                    <h3>Book Lab Test</h3>
+                    <p>Schedule diagnostic tests</p>
+                </div>
+                <div class="action-card" onclick="showSection('appointments')">
+                    <i>📅</i>
+                    <h3>My Appointments</h3>
+                    <p>View upcoming appointments</p>
+                </div>
+                <div class="action-card" onclick="showSection('lab-reports')">
+                    <i>📋</i>
+                    <h3>Lab Reports</h3>
+                    <p>View test results</p>
+                </div>
+            </div>
+
+            <section id="overview-section" class="dashboard-grid">
+                <article class="panel-card dashboard-stat">
+                    <span>Upcoming Appointments</span>
+                    <strong id="upcoming-appointments">0</strong>
+                    <p id="next-appointment">No upcoming appointments</p>
+                </article>
+                <article class="panel-card dashboard-stat">
+                    <span>Pending Lab Reports</span>
+                    <strong id="pending-reports">0</strong>
+                    <p>Reports awaiting completion</p>
+                </article>
+                <article class="panel-card dashboard-stat">
+                    <span>Completed Tests</span>
+                    <strong id="completed-tests">0</strong>
+                    <p>Successfully completed lab tests</p>
+                </article>
+            </section>
+
+            <section id="appointments-section" class="dashboard-grid dashboard-grid-secondary" style="display: none;">
+                <article class="panel-card" style="grid-column: 1 / -1;">
+                    <h2>My Appointments</h2>
+                    <div id="appointments-list">Loading appointments...</div>
+                </article>
+            </section>
+
+            <section id="lab-reports-section" class="dashboard-grid dashboard-grid-secondary" style="display: none;">
+                <article class="panel-card" style="grid-column: 1 / -1;">
+                    <h2>My Lab Reports</h2>
+                    <div id="lab-reports-list">Loading lab reports...</div>
+                </article>
+            </section>
+
+            <section id="profile-section" class="dashboard-grid dashboard-grid-secondary" style="display: none;">
+                <article class="panel-card" style="grid-column: 1 / -1;">
+                    <h2>My Profile</h2>
+                    <div id="profile-info">Loading profile...</div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <script src="assets/patient-dashboard.js"></script>
+</body>
+</html>

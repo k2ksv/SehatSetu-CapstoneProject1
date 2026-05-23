@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Sehat Setu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" class="site-brand">
+            <img src="assets/sehatsetu-logo.png" alt="Sehat Setu Logo" class="site-logo">
+            <div class="brand-text">
+                <strong>Sehat Setu</strong>
+                <span class="brand-subtitle">Dashboard & Health Connect</span>
+            </div>
+        </a>
+        <nav class="site-nav">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="doctors.html">Doctors</a>
+            <a href="hospitals.html">Hospitals</a>
+            <a href="labtests.html">Lab Tests</a>
+            <a href="compare.html">Compare</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+    <div class="dashboard-page">
+        <aside class="dashboard-sidebar">
+            <a class="brand custom-brand-logo" href="index.html">
+                <span class="logo-circle">
+                    <img src="assets/sehatsetu-logo.png" alt="Sehat Setu Logo" style="width: 44px; height: 44px; border-radius: 50%; background: #fff; object-fit: cover; box-shadow: 0 2px 8px rgba(52,152,219,0.10);" />
+                </span>
+                <span class="logo-text">
+                    <strong>Sehat Setu</strong>
+                    <small>Care dashboard</small>
+                </span>
+            </a>
+            <nav class="dashboard-nav">
+                <a class="active" href="dashboard.html">Overview</a>
+                <a href="register.html">Patients</a>
+                <a href="login.html">Appointments</a>
+                <a href="index.html#services">Records</a>
+                <a href="index.html#contact">Support</a>
+            </nav>
+        </aside>
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div>
+                    <p class="eyebrow">Overview</p>
+                    <h1>Good afternoon, Asha</h1>
+                </div>
+                <a class="button button-small" href="index.html">Back to website</a>
+            </header>
+            <section class="dashboard-grid">
+                <article class="panel-card dashboard-stat">
+                    <span>Upcoming appointments</span>
+                    <strong>03</strong>
+                    <p>Next consultation at 4:30 PM with Dr. Mehta.</p>
+                </article>
+                <article class="panel-card dashboard-stat">
+                    <span>Pending reports</span>
+                    <strong>02</strong>
+                    <p>Blood test and ECG summaries expected by tomorrow.</p>
+                </article>
+                <article class="panel-card dashboard-stat">
+                    <span>Medication reminders</span>
+                    <strong>06</strong>
+                    <p>Three morning alerts and three evening alerts scheduled.</p>
+                </article>
+            </section>
+            <section class="dashboard-grid dashboard-grid-secondary">
+                <article class="panel-card">
+                    <h2>Recent activity</h2>
+                    <ul class="activity-list">
+                        <li>Prescription uploaded by cardiology team</li>
+                        <li>Family caregiver granted access</li>
+                        <li>Lab appointment confirmed for Monday</li>
+                    </ul>
+                </article>
+                <article class="panel-card">
+                    <h2>Care checklist</h2>
+                    <ul class="activity-list checklist">
+                        <li>Complete fasting test before 9:00 AM</li>
+                        <li>Carry previous reports for follow-up</li>
+                        <li>Review medicine schedule in the evening</li>
+                    </ul>
+                </article>
+                <article class="panel-card">
+                    <h2>Registered Users</h2>
+                    <ul id="user-list" class="activity-list"></ul>
+                </article>
+            </section>
+        </main>
+        <!-- System Controller Input -->
+        <div style="position:fixed;bottom:24px;right:24px;z-index:1000;background:#fff;padding:12px 16px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <input id="system-command-input" type="text" placeholder="Type command in English, Hindi, Hinglish..." style="width:260px;padding:8px 12px;border:1px solid #ccc;border-radius:4px;" />
+            <span style="font-size:12px;color:#888;">Press Enter</span>
+        </div>
+    </div>
+
+    <script src="assets/config.js"></script>
+    <script src="assets/script.js"></script>
+    <script src="assets/dashboard-api.js"></script>
+    <script src="assets/system-controller.js"></script>
+</body>
+</html> 0   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

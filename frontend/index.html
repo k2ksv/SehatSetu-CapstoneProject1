@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sehat Setu | Connected Care Platform</title>
+    <meta name="description" content="Sehat Setu connects patients, doctors, and families through one accessible digital health experience.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="page-shell home-shell">
+        <header class="site-header">
+            <nav class="navbar container">
+                <a class="brand custom-brand-logo" href="index.html">
+                    <span class="logo-circle" style="background: linear-gradient(135deg, #16A697, #0E7A6F); box-shadow: 0 4px 14px rgba(22, 166, 151, 0.2);">
+                        <img src="assets/sehatsetu-logo.png" alt="Sehat Setu Logo" style="width: 44px; height: 44px; border-radius: 50%; background: #fff; object-fit: cover;" />
+                    </span>
+                    <span class="logo-text">
+                        <strong style="color: #0E7A6F; letter-spacing: -0.02em;">Sehat Setu</strong>
+                        <small style="color: #16A697; font-size: 0.88em;">Connected care, built for families</small>
+                    </span>
+                </a>
+                <div class="nav-links" id="nav-links">
+                    <a href="doctors.html">Find Doctors</a>
+                    <a href="hospitals.html">Hospitals</a>
+                    <a href="video-consult.html">Video Consult</a>
+                    <a href="labtests.html">Lab Tests</a>
+                    <a href="surgeries.html">Surgeries</a>
+                    <a class="text-link" href="login.html">Login</a>
+                    <a class="button button-small" href="#">Sign Up</a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main-bg">
+            <!-- Health Concerns Heading and Search Bar at Top -->
+            <section class="container section-gap-small">
+                <h2 class="health-section-title">Consult top doctors online for any health concern</h2>
+                <div class="search-bar-row">
+                    <select class="city-select" title="Select your city">
+                        <option>Patna</option>
+                        <option>Delhi</option>
+                        <option>Kolkata</option>
+                        <option>Bangalore</option>
+                    </select>
+                    <input type="text" class="search-input" placeholder="Search by name, address, insurance, department">
+                </div>
+            </section>
+
+            <!-- Feature Cards Section -->
+            <section class="container section-gap">
+                <div class="feature-cards-flex">
+                    <div class="card-medical card-feature">
+                        <img src="assets/videoConsult.jpeg" alt="Video Consult" class="feature-img">
+                        <h3 class="feature-title">Instant Video Consultation</h3>
+                        <p class="feature-desc">Connect within 60 secs</p>
+                    </div>
+                    <div class="card-medical card-feature">
+                        <img src="assets/findDoctors.jpeg" alt="Find Doctors" class="feature-img">
+                        <h3 class="feature-title">Find Doctors Near You</h3>
+                        <p class="feature-desc">Confirmed appointments</p>
+                    </div>
+                    <div class="card-medical card-feature">
+                        <img src="assets/Labtest.jpeg" alt="Lab Tests" class="feature-img feature-img-cover">
+                        <h3 class="feature-title">Lab Tests</h3>
+                        <p class="feature-desc">Safe and trusted lab tests</p>
+                    </div>
+                    <div class="card-medical card-feature">
+                        <img src="assets/surgeries.jpeg" alt="Surgeries" class="feature-img">
+                        <h3 class="feature-title">Surgeries</h3>
+                        <p class="feature-desc">Safe and trusted surgery centers</p>
+                    </div>
+                </div>
+            </section>
+               
+                            
+                        </aside>
+                        <main class="main-content">
+                            <!-- Search Bar -->
+                            
+                            <!-- Dynamic Sections -->
+                            
+                            <section id="home" class="section-content" style="display:none;">
+                                <h2>Home</h2>
+                                <p>Welcome to Sehat-Setu! Access all your health services in one place.</p>
+                            </section>
+                            <section id="hospitals" class="section-content" style="display:none;">
+                                <h2>Hospitals</h2>
+                                <ul>
+                                    <li>Govt. hospitals</li>
+                                    <li>Pvt. hospitals</li>
+                                    <li>Trust-based hospitals</li>
+                                </ul>
+                            </section>
+                            <section id="doctors" class="section-content" style="display:none;">
+                                <h2>Doctors</h2>
+                                <ul>
+                                    <li>Available today</li>
+                                    <li>Best doctors</li>
+                                    <li>Searching via address</li>
+                                    <li>By their specialization (search)</li>
+                                    <li>Via hospitals</li>
+                                </ul>
+                            </section>
+                            <section id="ebookings" class="section-content" style="display:none;">
+                                <h2>E-Bookings</h2>
+                                <ul>
+                                    <li>Appointments</li>
+                                    <li>Tests
+                                        <ul>
+                                            <li>Blood test</li>
+                                            <li>CT</li>
+                                            <li>MRI</li>
+                                            <li>X-Rays</li>
+                                            <li>Special test</li>
+                                            <li>Ultrasound</li>
+                                            <li>Other tests</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </section>
+                            <section id="compare" class="section-content" style="display:none;">
+                                <h2>Compare & See</h2>
+                                <ul>
+                                    <li>Doctors</li>
+                                    <li>Hospitals (based on their facilities)</li>
+                                </ul>
+                            </section>
+                            <section id="ambulance" class="section-content" style="display:none;">
+                                <h2>Ambulance & Emergency Services</h2>
+                                <ul>
+                                    <li>ICU Services</li>
+                                    <li>24×7 Services</li>
+                                    <li>Blood bank facility (Available)</li>
+                                    <li>Trauma Center</li>
+                                    <li>Ambulance
+                                        <ul>
+                                            <li>Hospital Ambulance</li>
+                                            <li>Pvt. Ambulance</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </section>
+                            <section id="insurance" class="section-content" style="display:none;">
+                                <h2>Insurance & EMI</h2>
+                                <ul>
+                                    <li>Check cashless availability</li>
+                                    <li>Insurances available for claim</li>
+                                    <li>EMI options (Hospital/company)</li>
+                                    <li>Insurance coverage understanding</li>
+                                </ul>
+                            </section>
+                            <section id="login" class="section-content" style="display:none;">
+                                <h2>Login</h2>
+                                <form id="login-form">
+                                    <input type="text" placeholder="Username" required><br>
+                                    <input type="password" placeholder="Password" required><br>
+                                    <button type="submit">Login</button>
+                                </form>
+                                <div id="login-status"></div>
+                                <ul>
+                                    <li>My appointments</li>
+                                    <li>Status</li>
+                                    <li>Recommendation by AI Health</li>
+                                </ul>
+                            </section>
+                        </main>
+                    </div>
+                    
+                </div>
+            </section>
+
+            <section class="strip-section">
+                <div class="container strip-grid">
+                    <div>
+                        <p class="metric-label">Appointments managed monthly</p>
+                        <strong>45,000+</strong>
+                    </div>
+                    <div>
+                        <p class="metric-label">Active doctor network</p>
+                        <strong>350+</strong>
+                    </div>
+                    <div>
+                        <p class="metric-label">Cities supported</p>
+                        <strong>28</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section container" id="services">
+                <div class="section-heading">
+                    <p class="eyebrow">Core services</p>
+                    <h2>Structured around the real health journey</h2>
+                </div>
+                <div class="services-grid">
+                    <article class="panel-card">
+                        <h3>Smart appointment booking</h3>
+                        <p>Patients can search departments, pick slots, and receive timely confirmations without repeated calls.</p>
+                    </article>
+                    <article class="panel-card">
+                        <h3>Health record hub</h3>
+                        <p>Prescriptions, reports, discharge summaries, and doctor notes remain accessible from one secure view.</p>
+                    </article>
+                    <article class="panel-card">
+                        <h3>Medicine reminders</h3>
+                        <p>Daily adherence support with refill prompts and follow-up notifications for chronic care programs.</p>
+                    </article>
+                    <article class="panel-card">
+                        <h3>Family care access</h3>
+                        <p>Share care updates with trusted family members so elderly patients are not managing everything alone.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="content-section alt-surface" id="journeys">
+                <div class="container journey-layout">
+                    <div class="section-heading">
+                        <p class="eyebrow">User journeys</p>
+                        <h2>Simple flows for patients, doctors, and administrators</h2>
+                    </div>
+                    <div class="timeline-list">
+                        <article>
+                            <span>01</span>
+                            <div>
+                                <h3>Patient onboarding</h3>
+                                <p>Register, complete profile, upload previous records, and book the first consultation.</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span>02</span>
+                            <div>
+                                <h3>Consultation and record updates</h3>
+                                <p>Doctors review history, issue prescriptions, and share reports back into the patient dashboard.</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span>03</span>
+                            <div>
+                                <h3>Ongoing care follow-up</h3>
+                                <p>Automated reminders, secure communication, and admin support keep treatment plans on track.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section container" id="contact">
+                <div class="cta-banner">
+                    <div>
+                        <p class="eyebrow">Launch ready structure</p>
+                        <h2>Start with a clean foundation for the Sehat Setu product site.</h2>
+                    </div>
+                    <div class="hero-actions">
+                        <a class="button" href="register.html">Create an account</a>
+                        <a class="button button-secondary" href="login.html">Access portal</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container footer-layout">
+                <div>
+                    <strong class="footer-brand">Sehat Setu</strong>
+                    <p class="footer-desc">Digital bridge between healthcare providers and the people they serve.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Home</a>
+                    <a href="#">Find Doctors</a>
+                    <a href="#">Video Consult</a>
+                    <a href="#">Lab Tests</a>
+                    <a href="#">Surgeries</a>
+                </div>
+                <p class="copyright footer-copyright">&copy; <span id="currentYear"></span> Sehat Setu</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/script.js"></script>
+    <script src="assets/system-controller.js"></script>
+</body>
+</html>

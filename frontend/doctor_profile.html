@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Profile | Sehat Setu</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f7fb;
+            color: #333;
+        }
+        .page-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+        }
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .header-row h1 {
+            margin: 0;
+            color: #1f5aa8;
+        }
+        .back-link {
+            color: #1f5aa8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .doctor-profile {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        .profile-card {
+            padding: 20px;
+            background: #f7fbff;
+            border-radius: 14px;
+            border: 1px solid #dfe7ef;
+        }
+        .doctor-photo {
+            text-align: center;
+        }
+        .doctor-photo img {
+            width: 100%;
+            max-width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 2px solid #d9e6f2;
+        }
+        .doctor-photo .no-photo {
+            width: 280px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            background: #e9f1fa;
+            color: #5f7a94;
+            font-size: 16px;
+            border: 2px dashed #cbd9e7;
+        }
+        .profile-section {
+            margin-bottom: 22px;
+        }
+        .profile-section h2 {
+            margin-top: 0;
+            color: #1f5aa8;
+            margin-bottom: 16px;
+        }
+        .profile-section p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        .profile-section a {
+            color: #1f5aa8;
+            text-decoration: none;
+        }
+        .profile-section a:hover {
+            text-decoration: underline;
+        }
+        .status-message {
+            padding: 18px;
+            border-radius: 12px;
+            background: #fff4e5;
+            color: #8f5a16;
+            border: 1px solid #ffddb2;
+            margin-bottom: 24px;
+        }
+        .appointment-form {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid #dfe7ef;
+            background: #f7fbff;
+        }
+        .appointment-form h2 {
+            margin-top: 0;
+            color: #1f5aa8;
+            margin-bottom: 18px;
+        }
+        .appointment-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .appointment-form .form-row.full-width {
+            grid-template-columns: 1fr;
+        }
+        .appointment-form label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .appointment-form input,
+        .appointment-form textarea,
+        .appointment-form button {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #cbd9e7;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+        .appointment-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .appointment-form button {
+            background: #1f5aa8;
+            color: white;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .appointment-form button:hover {
+            background: #174f8e;
+        }
+        @media (max-width: 900px) {
+            .doctor-profile {
+                grid-template-columns: 1fr;
+            }
+            .doctor-photo img,
+            .doctor-photo .no-photo {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+            }
+            .appointment-form .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" class="site-brand">
+            <img src="assets/sehatsetu-logo.png" alt="Sehat Setu Logo" class="site-logo">
+            <div class="brand-text">
+                <strong>Sehat Setu</strong>
+                <span class="brand-subtitle">Dashboard & Health Connect</span>
+            </div>
+        </a>
+        <nav class="site-nav">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="doctors.html">Doctors</a>
+            <a href="hospitals.html">Hospitals</a>
+            <a href="compare.html">Compare</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+    <div class="page-container">
+        <div class="header-row">
+            <h1>Doctor Profile</h1>
+            <a href="doctors.html" class="back-link">← Back to Doctors</a>
+        </div>
+
+        <div id="statusMessage" class="status-message" style="display:none"></div>
+        <div id="profileContent" style="display:none">
+            <div class="doctor-profile">
+                <div class="profile-card doctor-photo" id="doctorPhotoContainer"></div>
+                <div>
+                    <div class="profile-section">
+                        <h2 id="doctorName"></h2>
+                        <p><strong>Specialty:</strong> <span id="doctorSpecialty"></span></p>
+                        <p><strong>Location:</strong> <span id="doctorLocation"></span></p>
+                        <p><strong>Experience:</strong> <span id="doctorExperience"></span> years</p>
+                        <p><strong>Hospital:</strong> <a id="doctorHospitalLink" href="#"></a></p>
+                        <p><strong>Rating:</strong> <span id="doctorRating"></span> / 5.0</p>
+                    </div>
+                    <div class="profile-section">
+                        <h2>Contact</h2>
+                        <p><strong>Phone:</strong> <span id="doctorContact"></span></p>
+                        <p><strong>Email:</strong> <a id="doctorEmailLink" href="#"></a></p>
+                    </div>
+                    <div class="profile-section">
+                        <h2>Details</h2>
+                        <p><strong>Qualifications:</strong> <span id="doctorQualifications"></span></p>
+                        <p><strong>Available Days:</strong> <span id="doctorDays"></span></p>
+                        <p><strong>Consultation Fee:</strong> ₹<span id="doctorFee"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="appointment-form">
+                <h2>Book an Appointment</h2>
+                <div class="form-row">
+                    <div>
+                        <label for="patientName">Your Name</label>
+                        <input type="text" id="patientName" placeholder="Full name" required>
+                    </div>
+                    <div>
+                        <label for="patientEmail">Email</label>
+                        <input type="email" id="patientEmail" placeholder="you@example.com" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div>
+                        <label for="patientPhone">Phone</label>
+                        <input type="tel" id="patientPhone" placeholder="Phone number" required>
+                    </div>
+                    <div>
+                        <label for="appointmentDate">Appointment Date</label>
+                        <input type="date" id="appointmentDate" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div>
+                        <label for="appointmentTime">Appointment Time</label>
+                        <input type="time" id="appointmentTime" required>
+                    </div>
+                </div>
+                <div class="form-row full-width">
+                    <div>
+                        <label for="appointmentReason">Reason for Visit</label>
+                        <textarea id="appointmentReason" placeholder="Describe your concern"></textarea>
+                    </div>
+                </div>
+                <button id="bookAppointmentButton" type="button">Request Appointment</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const backendUrl = 'http://127.0.0.1:8000';
+        const params = new URLSearchParams(window.location.search);
+        const doctorId = params.get('id');
+
+        function showError(message) {
+            const statusMessage = document.getElementById('statusMessage');
+            statusMessage.style.display = 'block';
+            statusMessage.textContent = message;
+            document.getElementById('profileContent').style.display = 'none';
+        }
+
+        async function loadDoctor() {
+            if (!doctorId) {
+                showError('Doctor ID is missing from the URL.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${backendUrl}/api/doctor/${doctorId}/`);
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    showError(errorData.error || 'Doctor not found.');
+                    return;
+                }
+
+                const doctor = await response.json();
+                document.getElementById('doctorName').textContent = `Dr. ${doctor.name}`;
+                document.getElementById('doctorSpecialty').textContent = doctor.specialty || 'N/A';
+                document.getElementById('doctorLocation').textContent = doctor.location || 'N/A';
+                document.getElementById('doctorExperience').textContent = doctor.experience_years || 0;
+                document.getElementById('doctorRating').textContent = doctor.rating || '0.0';
+                document.getElementById('doctorHospitalLink').textContent = doctor.hospital.name || 'Hospital';
+                document.getElementById('doctorHospitalLink').href = `${backendUrl}/hospital/${doctor.hospital.id}/`;
+                document.getElementById('doctorContact').textContent = doctor.contact_number || 'Not available';
+                const emailLink = document.getElementById('doctorEmailLink');
+                emailLink.textContent = doctor.email || 'Not available';
+                emailLink.href = doctor.email ? `mailto:${doctor.email}` : '#';
+                document.getElementById('doctorQualifications').textContent = doctor.qualifications || 'Not available';
+                document.getElementById('doctorDays').textContent = doctor.available_days || 'Not available';
+                document.getElementById('doctorFee').textContent = doctor.consultation_fee || '0.00';
+
+                const photoContainer = document.getElementById('doctorPhotoContainer');
+                if (doctor.photo) {
+                    photoContainer.innerHTML = `<img src="${doctor.photo}" alt="Dr. ${doctor.name}">`;
+                } else {
+                    photoContainer.innerHTML = '<div class="no-photo">No Photo Available</div>';
+                }
+
+                document.getElementById('statusMessage').style.display = 'none';
+                document.getElementById('profileContent').style.display = 'block';
+            } catch (error) {
+                showError('Unable to load doctor profile. Make sure the backend is running.');
+                console.error(error);
+            }
+        }
+
+        async function submitAppointment() {
+            const patientName = document.getElementById('patientName').value.trim();
+            const patientEmail = document.getElementById('patientEmail').value.trim();
+            const patientPhone = document.getElementById('patientPhone').value.trim();
+            const appointmentDate = document.getElementById('appointmentDate').value;
+            const appointmentTime = document.getElementById('appointmentTime').value;
+            const reason = document.getElementById('appointmentReason').value.trim();
+
+            if (!patientName || !patientEmail || !patientPhone || !appointmentDate || !appointmentTime) {
+                showError('Please fill in all required appointment fields.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${backendUrl}/api/book_appointment/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        doctor_id: doctorId,
+                        patient_name: patientName,
+                        patient_email: patientEmail,
+                        patient_phone: patientPhone,
+                        appointment_date: appointmentDate,
+                        appointment_time: appointmentTime,
+                        reason,
+                    }),
+                });
+
+                const result = await response.json();
+                if (!response.ok) {
+                    showError(result.error || 'Unable to book appointment.');
+                    return;
+                }
+
+                document.getElementById('statusMessage').style.display = 'block';
+                document.getElementById('statusMessage').textContent = `Appointment requested successfully for ${result.appointment_date} at ${result.appointment_time}.`;
+                document.getElementById('profileContent').scrollIntoView({behavior: 'smooth'});
+            } catch (error) {
+                showError('Unable to submit appointment. Please try again.');
+                console.error(error);
+            }
+        }
+
+        document.getElementById('bookAppointmentButton').addEventListener('click', submitAppointment);
+        loadDoctor();
+    </script>
+</body>
+</html>

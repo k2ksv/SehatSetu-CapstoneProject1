@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Comparison</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .comparison-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 16px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .comparison-table th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        .hospital-column {
+            min-width: 250px;
+            text-align: center;
+            padding: 15px;
+            vertical-align: top;
+        }
+        .hospital-photo {
+            margin-bottom: 10px;
+        }
+        .hospital-thumb {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 2px solid #ddd;
+        }
+        .no-photo-thumb {
+            width: 120px;
+            height: 80px;
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 10px;
+        }
+        .hospital-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        .hospital-type {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .private { background: #e74c3c; color: white; }
+        .government { background: #27ae60; color: white; }
+        .rating {
+            color: #f39c12;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .price-highlight {
+            background-color: #fff3cd;
+            padding: 8px;
+            border-radius: 4px;
+            border-left: 4px solid #f39c12;
+        }
+        .facilities-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .facility-tag {
+            background: #ecf0f1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            border: 1px solid #bdc3c7;
+        }
+        .specialty-tag {
+            background: #d5dbdb;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            border: 1px solid #85929e;
+        }
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .back-btn:hover {
+            background: #7f8c8d;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+        }
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #e74c3c;
+            font-size: 1.2em;
+        }
+        .comparison-criteria {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .criteria-item {
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
+        .criteria-item h4 {
+            margin: 0 0 8px 0;
+            color: #495057;
+        }
+        .criteria-item p {
+            margin: 0;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" class="site-brand">
+            <img src="assets/sehatsetu-logo.png" alt="Sehat Setu Logo" class="site-logo">
+            <div class="brand-text">
+                <strong>Sehat Setu</strong>
+                <span class="brand-subtitle">Dashboard & Health Connect</span>
+            </div>
+        </a>
+        <nav class="site-nav">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="doctors.html">Doctors</a>
+            <a href="hospitals.html">Hospitals</a>
+            <a href="labtests.html">Lab Tests</a>
+            <a href="compare.html">Compare</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+    <a href="hospitals.html" class="back-btn">← Back to Hospitals</a>
+
+    <div class="comparison-container">
+        <h1 class="comparison-header">Hospital Comparison</h1>
+
+        <div id="loading" class="loading">Loading hospital data...</div>
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div id="comparisonContent" style="display: none;">
+            <div class="comparison-criteria">
+                <h3>Comparison Criteria</h3>
+                <div class="criteria-grid" id="criteriaGrid">
+                    <!-- Comparison criteria will be shown here -->
+                </div>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Criteria</th>
+                        <th id="hospitalHeaders"><!-- Hospital names will be inserted here --></th>
+                    </tr>
+                </thead>
+                <tbody id="comparisonBody">
+                    <!-- Comparison rows will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="assets/app.js"></script>
+    <script>
+        let hospitals = [];
+
+        async function loadComparisonData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ids = urlParams.get('ids');
+
+            if (!ids) {
+                showError('No hospitals selected for comparison.');
+                return;
+            }
+
+            const hospitalIds = ids.split(',').map(id => parseInt(id.trim()));
+
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/api/compare/?ids=${hospitalIds.join('&ids[]=')}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    showError(data.error);
+                    return;
+                }
+
+                hospitals = data.hospitals;
+                displayComparison();
+
+            } catch (error) {
+                console.error('Error loading comparison data:', error);
+                showError('Error loading hospital data. Please try again.');
+            }
+        }
+
+        function showError(message) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').textContent = message;
+            document.getElementById('error').style.display = 'block';
+        }
+
+        function displayComparison() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('comparisonContent').style.display = 'block';
+
+            // Set hospital headers
+            const headersContainer = document.getElementById('hospitalHeaders');
+            headersContainer.innerHTML = hospitals.map(hospital => `
+                <th class="hospital-column">
+                    <div class="hospital-photo">
+                        ${hospital.photo ?
+                            `<img src="${hospital.photo}" alt="${hospital.name}" class="hospital-thumb">` :
+                            '<div class="no-photo-thumb">No Photo</div>'
+                        }
+                    </div>
+                    <div class="hospital-name">${hospital.name}</div>
+                    <div class="hospital-type ${hospital.type}">${hospital.type.charAt(0).toUpperCase() + hospital.type.slice(1)}</div>
+                    <div class="rating">${hospital.rating}/5 ★</div>
+                </th>
+            `).join('');
+
+            // Create comparison rows
+            const tbody = document.getElementById('comparisonBody');
+            tbody.innerHTML = '';
+
+            // Price Range
+            tbody.innerHTML += createComparisonRow('Price Range', hospitals.map(h => h.price_range || 'Not specified'), 'price-highlight');
+
+            // Location
+            tbody.innerHTML += createComparisonRow('Location', hospitals.map(h => h.location));
+
+            // Beds
+            tbody.innerHTML += createComparisonRow('Number of Beds', hospitals.map(h => h.beds));
+
+            // Specialties
+            tbody.innerHTML += createComparisonRow('Specialties', hospitals.map(h => {
+                if (!h.specialties || h.specialties.length === 0) return 'Not specified';
+                return h.specialties.map(s => `<span class="specialty-tag">${s}</span>`).join(' ');
+            }));
+
+            // Facilities
+            tbody.innerHTML += createComparisonRow('Facilities', hospitals.map(h => {
+                if (!h.facilities || h.facilities.length === 0) return 'Not specified';
+                return h.facilities.map(f => `<span class="facility-tag">${f}</span>`).join(' ');
+            }));
+
+            // Contact
+            tbody.innerHTML += createComparisonRow('Contact Number', hospitals.map(h => h.contact_number || 'Not available'));
+
+            // Address
+            tbody.innerHTML += createComparisonRow('Address', hospitals.map(h => h.address || 'Not available'));
+
+            // Update criteria grid
+            updateCriteriaGrid();
+        }
+
+        function createComparisonRow(criteria, values, extraClass = '') {
+            return `
+                <tr class="${extraClass}">
+                    <td><strong>${criteria}</strong></td>
+                    ${values.map(value => `<td>${value}</td>`).join('')}
+                </tr>
+            `;
+        }
+
+        function updateCriteriaGrid() {
+            const grid = document.getElementById('criteriaGrid');
+            const criteria = [
+                { label: 'Average Price', values: hospitals.map(h => h.price_range || 'N/A') },
+                { label: 'Total Facilities', values: hospitals.map(h => h.facilities ? h.facilities.length : 0) },
+                { label: 'Total Specialties', values: hospitals.map(h => h.specialties ? h.specialties.length : 0) },
+                { label: 'Bed Capacity', values: hospitals.map(h => h.beds) },
+                { label: 'Rating', values: hospitals.map(h => `${h.rating}/5`) }
+            ];
+
+            grid.innerHTML = criteria.map(criterion => `
+                <div class="criteria-item">
+                    <h4>${criterion.label}</h4>
+                    <p>${criterion.values.join(' | ')}</p>
+                </div>
+            `).join('');
+        }
+
+        // Load data on page load
+        loadComparisonData();
+    </script>
+</body>
+</html>
+                    } else if (sortBy === 'location') {
+                        return a.location.localeCompare(b.location);
+                    }
+                    return 0;
+                });
+            }
+
+            renderTable(filtered);
+        }
+
+        // Initial render
+        renderTable(hospitals);
+    </script>
+</body>
+</html>

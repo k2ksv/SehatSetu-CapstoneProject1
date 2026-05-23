@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ doctor.name }} | Sehat Setu</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        .site-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; background: rgba(255,255,255,0.96); border-bottom: 1px solid rgba(52,152,219,0.16); margin-bottom: 22px; }
+        .site-header .site-brand { display: flex; flex-direction: column; color: #1a3b5d; text-decoration: none; }
+        .site-header .site-brand strong { font-size: 1.1rem; }
+        .site-header .site-brand .brand-subtitle { color: #5a738c; font-size: 0.9rem; }
+        .site-header .site-nav { display: flex; gap: 14px; flex-wrap: wrap; }
+        .site-header .site-nav a { color: #1a3b5d; text-decoration: none; font-weight: 600; }
+        .site-header .site-nav a:hover { color: #3498db; }
+        .site-header .site-nav a + a { margin-left: 8px; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a href="/" class="site-brand">
+            <strong>Sehat Setu</strong>
+            <span class="brand-subtitle">Dashboard & Health Connect</span>
+        </a>
+        <nav class="site-nav">
+            <a href="/">Home</a>
+            <a href="/doctors/">Doctors</a>
+            <a href="/hospitals/">Hospitals</a>
+        </nav>
+    </header>
+    <div class="container">
+        <header>
+            <h1>Dr. {{ doctor.name }}</h1>
+            <a href="/doctors/" class="back-link">← Back to Doctors</a>
+        </header>
+
+        <div class="doctor-profile">
+            <div class="doctor-photo">
+                {% if doctor.photo %}
+                    <img src="{{ doctor.photo.url }}" alt="Dr. {{ doctor.name }}" class="doctor-image">
+                {% else %}
+                    <div class="no-photo">No Photo Available</div>
+                {% endif %}
+            </div>
+
+            <div class="doctor-info">
+                <div class="info-section">
+                    <h2>Basic Information</h2>
+                    <p><strong>Specialty:</strong> {{ doctor.specialty }}</p>
+                    <p><strong>Location:</strong> {{ doctor.location }}</p>
+                    <p><strong>Experience:</strong> {{ doctor.experience_years }} years</p>
+                    <p><strong>Hospital:</strong> <a href="/hospital/{{ doctor.hospital.id }}/">{{ doctor.hospital.name }}</a></p>
+                    <p><strong>Rating:</strong> ⭐ {{ doctor.rating }}/5.0</p>
+                </div>
+
+                <div class="info-section">
+                    <h2>Contact Information</h2>
+                    {% if doctor.contact_number %}
+                        <p><strong>Phone:</strong> {{ doctor.contact_number }}</p>
+                    {% endif %}
+                    {% if doctor.email %}
+                        <p><strong>Email:</strong> <a href="mailto:{{ doctor.email }}">{{ doctor.email }}</a></p>
+                    {% endif %}
+                </div>
+
+                <div class="info-section">
+                    <h2>Professional Details</h2>
+                    {% if doctor.qualifications %}
+                        <p><strong>Qualifications:</strong> {{ doctor.qualifications }}</p>
+                    {% endif %}
+                    {% if doctor.available_days %}
+                        <p><strong>Available Days:</strong> {{ doctor.available_days }}</p>
+                    {% endif %}
+                    {% if doctor.consultation_fee %}
+                        <p><strong>Consultation Fee:</strong> ₹{{ doctor.consultation_fee }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .back-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .doctor-profile {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .doctor-photo {
+            text-align: center;
+        }
+
+        .doctor-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid #ddd;
+        }
+
+        .no-photo {
+            width: 250px;
+            height: 250px;
+            background-color: #f8f9fa;
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 16px;
+        }
+
+        .doctor-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+
+        .info-section h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.2em;
+        }
+
+        .info-section p {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .info-section a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .info-section a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .doctor-profile {
+                grid-template-columns: 1fr;
+            }
+
+            .doctor-photo {
+                order: -1;
+            }
+
+            .doctor-image, .no-photo {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</body>
+</html>

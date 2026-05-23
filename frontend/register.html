@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Sehat Setu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" class="site-brand">
+            <img src="assets/sehatsetu-logo.png" alt="Sehat Setu Logo" class="site-logo">
+            <div class="brand-text">
+                <strong>Sehat Setu</strong>
+                <span class="brand-subtitle">Dashboard & Health Connect</span>
+            </div>
+        </a>
+        <nav class="site-nav">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="doctors.html">Doctors</a>
+            <a href="hospitals.html">Hospitals</a>
+            <a href="compare.html">Compare</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+    <main class="auth-page auth-page-register">
+        <section class="auth-side auth-side-register">
+            <a class="brand brand-light" href="index.html">
+                <span class="brand-mark" style="background: none; box-shadow: none; padding: 0;">
+                    <img src="assets/sehatsetu-logo.png" alt="Sehat Setu Logo" style="width: 44px; height: 44px; border-radius: 50%; background: #fff; object-fit: cover; display: block;" />
+                </span>
+                <span>
+                    <strong>Sehat Setu</strong>
+                    <small>Create a patient account</small>
+                </span>
+            </a>
+            <div class="auth-copy">
+                <p class="eyebrow">Fast onboarding</p>
+                <h1>Join the care network in a few steps.</h1>
+                <p>Set up your profile, add emergency contacts, and start managing appointments digitally.</p>
+            </div>
+        </section>
+        <section class="auth-panel">
+            <div class="auth-card">
+                <p class="eyebrow">Register</p>
+                <h2>Create your account</h2>
+                <form class="auth-form two-column-form">
+                    <label>
+                        <span>Full name</span>
+                        <input type="text" placeholder="Enter full name">
+                    </label>
+                    <label>
+                        <span>Phone number</span>
+                        <input type="tel" placeholder="Enter phone number">
+                    </label>
+                    <label>
+                        <span>Email address</span>
+                        <input type="email" placeholder="name@example.com">
+                    </label>
+                    <label>
+                        <span>City</span>
+                        <input type="text" placeholder="Enter city">
+                    </label>
+                    <label class="full-width">
+                        <span>Create password</span>
+                        <input type="password" placeholder="Set a secure password">
+                    </label>
+                    <label class="checkbox-row full-width">
+                        <input type="checkbox">
+                        <span>I agree to the terms and privacy policy.</span>
+                    </label>
+                    <button class="button full-width" type="submit">Continue to dashboard</button>
+                </form>
+                <p class="auth-meta">Already registered? <a href="login.html">Sign in here</a>.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/config.js"></script>
+    <script src="assets/script.js"></script>
+    <script src="assets/register-api.js"></script>
+    <script src="assets/utils.js"></script>
+    <script src="assets/validation.js"></script>
+    <script src="assets/dom-helper.js"></script>
+    <script src="assets/storage.js"></script>
+    <script src="assets/notifications.js"></script>
+</body>
+</html>

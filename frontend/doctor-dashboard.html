@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard | Sehat Setu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .role-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #e8f5e8;
+            color: #2e7d32;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        .doctor-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .action-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .action-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .action-card i {
+            font-size: 2em;
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+        .logout-btn {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .logout-btn:hover {
+            background: #27ae60;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-confirmed { background: #d1ecf1; color: #0c5460; }
+        .status-completed { background: #d4edda; color: #155724; }
+        .status-cancelled { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" class="site-brand">
+            <img src="assets/sehatsetu-logo.png" alt="Sehat Setu Logo" class="site-logo">
+            <div class="brand-text">
+                <strong>Sehat Setu</strong>
+                <span class="brand-subtitle">Doctor Dashboard</span>
+            </div>
+        </a>
+        <nav class="site-nav">
+            <a href="doctor-dashboard.html">Dashboard</a>
+            <a href="add_database.html">Manage Data</a>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </nav>
+    </header>
+
+    <div class="dashboard-page">
+        <aside class="dashboard-sidebar">
+            <div class="brand custom-brand-logo">
+                <span class="logo-circle">
+                    <img src="assets/sehatsetu-logo.png" alt="Sehat Setu Logo" style="width: 44px; height: 44px; border-radius: 50%; background: #fff; object-fit: cover; box-shadow: 0 2px 8px rgba(52,152,219,0.10);" />
+                </span>
+                <span class="logo-text">
+                    <strong>Sehat Setu</strong>
+                    <small>Doctor Portal</small>
+                </span>
+            </div>
+            <nav class="dashboard-nav">
+                <a class="active" href="#overview">Overview</a>
+                <a href="#appointments">Appointments</a>
+                <a href="#lab-reports">Lab Reports</a>
+                <a href="#profile">My Profile</a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div>
+                    <p class="eyebrow">Doctor Dashboard</p>
+                    <h1 id="greeting">Good afternoon, Doctor</h1>
+                    <span class="role-badge">Doctor</span>
+                </div>
+                <a class="button button-small" href="index.html">Back to website</a>
+            </header>
+
+            <div class="doctor-actions">
+                <div class="action-card" onclick="showSection('appointments')">
+                    <i>📅</i>
+                    <h3>Manage Appointments</h3>
+                    <p>View and update patient appointments</p>
+                </div>
+                <div class="action-card" onclick="showSection('lab-reports')">
+                    <i>📋</i>
+                    <h3>Lab Reports</h3>
+                    <p>Add and manage test reports</p>
+                </div>
+                <div class="action-card" onclick="window.location.href='add_database.html'">
+                    <i>⚙️</i>
+                    <h3>Manage Data</h3>
+                    <p>Add hospitals, doctors, lab tests</p>
+                </div>
+                <div class="action-card" onclick="showSection('profile')">
+                    <i>👤</i>
+                    <h3>My Profile</h3>
+                    <p>View and update profile</p>
+                </div>
+            </div>
+
+            <section id="overview-section" class="dashboard-grid">
+                <article class="panel-card dashboard-stat">
+                    <span>Today's Appointments</span>
+                    <strong id="today-appointments">0</strong>
+                    <p id="next-appointment">No appointments today</p>
+                </article>
+                <article class="panel-card dashboard-stat">
+                    <span>Pending Reports</span>
+                    <strong id="pending-reports">0</strong>
+                    <p>Reports to be completed</p>
+                </article>
+                <article class="panel-card dashboard-stat">
+                    <span>Total Patients</span>
+                    <strong id="total-patients">0</strong>
+                    <p>Patients seen this month</p>
+                </article>
+            </section>
+
+            <section id="appointments-section" class="dashboard-grid dashboard-grid-secondary" style="display: none;">
+                <article class="panel-card" style="grid-column: 1 / -1;">
+                    <h2>My Appointments</h2>
+                    <div id="appointments-list">Loading appointments...</div>
+                </article>
+            </section>
+
+            <section id="lab-reports-section" class="dashboard-grid dashboard-grid-secondary" style="display: none;">
+                <article class="panel-card" style="grid-column: 1 / -1;">
+                    <h2>Lab Reports Management</h2>
+                    <div id="lab-reports-management">Loading...</div>
+                </article>
+            </section>
+
+            <section id="profile-section" class="dashboard-grid dashboard-grid-secondary" style="display: none;">
+                <article class="panel-card" style="grid-column: 1 / -1;">
+                    <h2>My Profile</h2>
+                    <div id="profile-info">Loading profile...</div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <script src="assets/config.js"></script>
+    <script src="assets/doctor-dashboard.js"></script>
+</body>
+</html>

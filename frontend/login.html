@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Sehat Setu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .auth-page {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: calc(100vh - var(--header-height, 0px));
+        }
+        
+        .auth-side-login {
+            background: linear-gradient(135deg, #0E7A6F 0%, #16A697 100%);
+            color: white;
+            padding: 4em 3em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .auth-panel {
+            background: #F5FFFE;
+            padding: 3em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .auth-card {
+            width: 100%;
+            max-width: 420px;
+        }
+        
+        .auth-form label {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1.5em;
+        }
+        
+        .auth-form label span {
+            font-weight: 700;
+            color: #0E7A6F;
+            margin-bottom: 0.6em;
+            font-size: 0.95em;
+            letter-spacing: 0.3px;
+        }
+        
+        .auth-form input[type="text"],
+        .auth-form input[type="password"],
+        .auth-form input[type="email"] {
+            padding: 12px 16px;
+            border: 2px solid rgba(22, 166, 151, 0.15);
+            border-radius: 12px;
+            background: rgba(245, 255, 254, 0.8);
+            color: #1A3B35;
+            font-size: 1em;
+            transition: all 200ms ease;
+        }
+        
+        .auth-form input[type="text"]:focus,
+        .auth-form input[type="password"]:focus,
+        .auth-form input[type="email"]:focus {
+            border-color: #16A697;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(22, 166, 151, 0.1);
+            outline: none;
+        }
+        
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.8em;
+            gap: 1em;
+        }
+        
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6em;
+            cursor: pointer;
+            font-weight: 500;
+            color: #4A6B64;
+        }
+        
+        .checkbox-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #16A697;
+        }
+        
+        .form-row a {
+            color: #16A697;
+            font-weight: 600;
+            transition: color 200ms ease;
+        }
+        
+        .form-row a:hover {
+            color: #FF8C42;
+        }
+        
+        .login-tab.active {
+            color: #0E7A6F !important;
+        }
+        
+        .login-tab:hover {
+            color: #0E7A6F;
+        }
+
+        .backend-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.1rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.95em;
+            background: rgba(22, 166, 151, 0.12);
+            color: #0E7A6F;
+            border: 1px solid rgba(22, 166, 151, 0.24);
+            margin-bottom: 1.5rem;
+        }
+
+        .backend-status.checking {
+            background: rgba(22, 166, 151, 0.12);
+            color: #0E7A6F;
+            border-color: rgba(22, 166, 151, 0.24);
+        }
+
+        .backend-status.disconnected {
+            background: rgba(255, 140, 66, 0.12);
+            color: #E67E2C;
+            border-color: rgba(255, 140, 66, 0.25);
+        }
+
+        .backend-status .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            background: currentColor;
+        }
+        
+        @media (max-width: 768px) {
+            .auth-page {
+                grid-template-columns: 1fr;
+            }
+            
+            .auth-side-login {
+                padding: 2em;
+                min-height: 300px;
+            }
+            
+            .auth-panel {
+                padding: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" class="site-brand">
+            <img src="assets/sehatsetu-logo.png" alt="Sehat Setu Logo" class="site-logo">
+            <div class="brand-text">
+                <strong>Sehat Setu</strong>
+                <span class="brand-subtitle">Dashboard & Health Connect</span>
+            </div>
+        </a>
+        <nav class="site-nav">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="doctors.html">Doctors</a>
+            <a href="hospitals.html">Hospitals</a>
+            <a href="compare.html">Compare</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+    <main class="auth-page">
+        <section class="auth-side auth-side-login">
+            <a class="brand brand-light" href="index.html" style="display:flex; align-items:center; gap:1rem;">
+                <span class="brand-mark" style="width:64px; height:64px; display:inline-grid; place-items:center; border-radius:12px; overflow:hidden; box-shadow:0 8px 24px rgba(22,166,151,0.25);">
+                    <img src="assets/sehatsetu-logo.png" alt="Sehat Setu" style="width:100%; height:100%; object-fit:cover; display:block;" />
+                </span>
+                <span>
+                    <strong style="font-size: 1.4em; letter-spacing: -0.02em;">Sehat Setu</strong>
+                    <small style="display: block; color: rgba(255,255,255,0.85); font-size: 0.95em; margin-top: 0.2em;">Patient and clinic login</small>
+                </span>
+            </a>
+            <div class="auth-copy" style="margin-top: 3em;">
+                <p class="eyebrow">Secure access</p>
+                <h1 style="color: #16A697; font-size: 2.4em; line-height: 1.2; margin: 0.5em 0;">Return to your health workspace.</h1>
+                <p style="color: rgba(255,255,255,0.8); font-size: 1.05em; line-height: 1.6; margin-top: 1em;">Access reports, appointments, reminders, and communication history from one login.</p>
+            </div>
+        </section>
+        <section class="auth-panel">
+            <div class="auth-card">
+                <div id="backendStatus" class="backend-status checking">
+                    <span class="status-dot"></span>
+                    <span>Checking backend...</span>
+                </div>
+                <!-- Login Type Tabs -->
+                <div style="display: flex; border-bottom: 3px solid rgba(22, 166, 151, 0.1); margin-bottom: 28px; gap: 0;">
+                    <button id="userLoginTab" class="login-tab active" onclick="switchLoginMode('user')" style="flex: 1; padding: 14px 16px; background: none; border: none; border-bottom: 4px solid #16A697; color: #0E7A6F; font-weight: 700; cursor: pointer; font-size: 1.05em; transition: all 200ms ease;">
+                        🩺 User Login
+                    </button>
+                    <button id="adminLoginTab" class="login-tab" onclick="switchLoginMode('admin')" style="flex: 1; padding: 14px 16px; background: none; border: none; border-bottom: 4px solid transparent; color: #7A9690; font-weight: 700; cursor: pointer; font-size: 1.05em; transition: all 200ms ease;">
+                        🔒 Admin Login
+                    </button>
+                </div>
+
+                <!-- User Login Section -->
+                <div id="userLoginSection">
+                    <p class="eyebrow" style="color: #16A697; font-weight: 700; letter-spacing: 0.4px;">Login</p>
+                    <h2 style="color: #0E7A6F; font-size: 2em; margin-bottom: 0.8em;">Welcome back</h2>
+                    <form class="auth-form" id="loginForm">
+                        <label>
+                            <span>User ID</span>
+                            <input type="text" id="loginEmail" placeholder="Enter your user ID" required>
+                        </label>
+                        <label>
+                            <span>Password</span>
+                            <input type="password" id="loginPassword" placeholder="Enter password" required>
+                        </label>
+                        <div class="form-row">
+                            <label class="checkbox-row">
+                                <input type="checkbox" id="rememberMe">
+                                <span>Remember me</span>
+                            </label>
+                            <a href="register.html">Create account</a>
+                        </div>
+                        <button type="submit" class="button" style="width: 100%; background: linear-gradient(135deg, #FF8C42, #E67E2C); color: white; border: none; font-size: 1.05em; letter-spacing: 0.3px; box-shadow: 0 6px 20px rgba(255, 140, 66, 0.25); transition: all 200ms ease;">Login to dashboard</button>
+                        <div id="loginMessage" style="margin-top: 10px; color: red;"></div>
+                    </form>
+                </div>
+
+                <!-- Admin Login Section -->
+                <div id="adminLoginSection" style="display: none;">
+                    <p class="eyebrow" style="color: #16A697; font-weight: 700; letter-spacing: 0.4px;">Admin Access</p>
+                    <h2 style="color: #0E7A6F; font-size: 2em; margin-bottom: 0.8em;">Administrator Login</h2>
+                    <p style="color: #4A6B64; margin-bottom: 20px; font-size: 0.95em; line-height: 1.6;">🔒 Secure admin portal. Only authorized administrators can access.</p>
+                    <form class="auth-form" id="adminLoginForm">
+                        <label>
+                            <span>Admin Email</span>
+                            <input type="text" id="adminEmail" placeholder="admin@example.com" required>
+                        </label>
+                        <label>
+                            <span>Password</span>
+                            <input type="password" id="adminPassword" placeholder="Enter password" required>
+                        </label>
+                        <div class="form-row">
+                            <label class="checkbox-row">
+                                <input type="checkbox" id="adminRememberMe">
+                                <span>Remember me</span>
+                            </label>
+                            <a href="index.html">Back to home</a>
+                        </div>
+                        <button type="submit" class="button" style="width: 100%; background: linear-gradient(135deg, #FF8C42, #E67E2C); color: white; border: none; font-size: 1.05em; letter-spacing: 0.3px; box-shadow: 0 6px 20px rgba(255, 140, 66, 0.25); transition: all 200ms ease;">Login as Administrator</button>
+                        <div id="adminLoginMessage" style="margin-top: 10px; color: red;"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/config.js"></script>
+    <script src="assets/script.js"></script>
+    <script src="assets/login.js"></script>
+</body>
+</html>
