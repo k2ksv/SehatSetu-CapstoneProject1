@@ -2,7 +2,7 @@
 A complete health solution.
 
 #Team Project
-#1 Keshav- Works as Backend Devloper
+#1 Keshav- Work as Backend Devloper
 
 ## Frontend structure
 
